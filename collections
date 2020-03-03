@@ -1,0 +1,20 @@
+#!/bin/bash
+
+while getopts c 0pc
+do
+	echo $0pc
+end
+
+exit 0
+
+LIST=${2:-default}
+
+if [ ! -d ${HOME}/.collections ]; then
+	mkdir ${HOME}/.collections
+fi
+
+if [ ! -f ${HOME/.collections/${LIST} ]; then
+	echo "List ${LIST} não existe."
+fi
+
+echo ${HOME}/.collections/default
