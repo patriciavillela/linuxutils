@@ -1,0 +1,31 @@
+#!/bin/bash
+
+LIST=${1:-index}
+
+if [ ! -d ~/.doc ]; then
+	echo "$HOME/.doc não existe. Criando."
+	mkdir $HOME/.doc
+fi
+
+if [ ${LIST} = "LIST" ]; then
+	ls $HOME/.doc
+	exit
+fi
+
+if [ ! -f "$HOME/.doc/${LIST}" ]; then
+	echo "Entrada ${LIST} não existe. Criar? [S/n]"
+	read option
+	if [ "${option,,}" != "s" ]; then
+		echo "Saindo."
+		exit
+	fi
+	vim -c "set autoindent" $VIMARGS "${HOME}/.doc/${LIST}"
+	exit
+fi
+
+if [ $# -eq 2 ] && [ "$2" = "e" ]; then
+	vim -c "set autoindent" "$HOME/.doc/${LIST}"
+	exit
+fi
+
+less "$HOME/.doc/${LIST}"
